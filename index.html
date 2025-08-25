@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Port Scanner - Hacker UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>⚡ Port Scanner ⚡</h2>
+        <form method="post">
+            <label for="target">Target Host / IP:</label>
+            <input type="text" name="target" id="target" required>
+
+            <!-- Scan Type Options -->
+            <div class="options">
+                <p><b>Scan Type:</b></p>
+                <label><input type="radio" name="scan_type" value="light" checked> Light Scan</label>
+                <label><input type="radio" name="scan_type" value="deep"> Deep Scan</label>
+                <label><input type="radio" name="scan_type" value="custom"> Custom Scan</label>
+            </div>
+
+            <!-- Protocol Options -->
+            <div class="options">
+                <p><b>Protocol:</b></p>
+                <label><input type="radio" name="protocol" value="tcp" checked> TCP</label>
+                <label><input type="radio" name="protocol" value="udp"> UDP</label>
+            </div>
+
+            <button type="submit">Start Scan</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <h3>🔍 Scan Results:</h3>
+            <pre>
+{% for line in result %}
+{{ line }}
+{% endfor %}
+            </pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
